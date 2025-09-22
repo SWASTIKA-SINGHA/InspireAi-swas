@@ -3,157 +3,141 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MoodVerse - Generative Quotes</title>
+  <title>InspireAI</title>
   <style>
     body {
-      font-family: 'Arial', sans-serif;
+      font-family: Arial, sans-serif;
+      background: #ffcccc; /* light red background */
       margin: 0;
       padding: 0;
-      background-color: red;
-      color: black;
       display: flex;
-      flex-direction: column;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       height: 100vh;
-      transition: background-color 0.5s, color 0.5s;
+      transition: background 0.5s, color 0.5s;
+    }
+
+    .container {
+      background: #ffe6e6; /* light pink box */
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      width: 350px;
+      border: 2px solid darkred;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      transition: background 0.5s, color 0.5s;
     }
 
     h1 {
-      color: black;
-      border: 3px solid black;
-      padding: 10px 20px;
-      border-radius: 10px;
-      background: white;
+      color: darkred;
+      margin-bottom: 15px;
     }
 
     input {
       padding: 10px;
-      width: 250px;
-      margin: 10px;
-      border: 2px solid black;
+      width: 70%;
+      border: 1px solid #333;
       border-radius: 5px;
     }
 
     button {
-      padding: 10px 20px;
+      padding: 10px 15px;
+      background: darkred;
+      color: white;
       border: none;
       border-radius: 5px;
       cursor: pointer;
       margin: 5px;
-      background-color: black;
-      color: red;
-      font-weight: bold;
-      transition: 0.3s;
     }
 
     button:hover {
-      background-color: red;
-      color: white;
+      background: #a00000;
     }
 
     #output {
-      margin-top: 20px;
-      padding: 15px;
-      border: 2px solid black;
-      border-radius: 10px;
-      width: 300px;
-      text-align: center;
+      margin-top: 15px;
       font-style: italic;
-      background: white;
-      color: black;
+      color: #333;
     }
 
-    /* Dark mode styles */
+    /* Dark mode */
     .dark-mode {
-      background-color: black;
-      color: red;
+      background: #1c1c1c;
+      color: white;
     }
-
+    .dark-mode .container {
+      background: #333;
+      color: white;
+      border: 2px solid white;
+    }
     .dark-mode h1 {
-      border: 3px solid red;
-      background: black;
-      color: red;
+      color: #ff4d4d;
     }
 
-    .dark-mode input {
-      border: 2px solid red;
-      background: #222;
-      color: white;
-    }
-
-    .dark-mode #output {
-      border: 2px solid red;
-      background: #111;
-      color: red;
-    }
-
-    /* Floating question mark */
+    /* Animated ? */
     .question {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      font-size: 40px;
-      color: white;
-      animation: float 3s infinite ease-in-out;
+      font-size: 24px;
+      color: darkred;
+      animation: bounce 1s infinite;
     }
-
-    @keyframes float {
-      0% { transform: translateY(0); }
-      50% { transform: translateY(-20px); }
-      100% { transform: translateY(0); }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
     }
   </style>
 </head>
 <body>
-  <h1>🌟 MoodVerse - Generative Quotes 🌟</h1>
-  
-  <input type="text" id="mood" placeholder="Enter your mood... e.g. happy, sad">
-  <br>
-  <button onclick="generateQuote()">Generate</button>
-  <button onclick="toggleMode()">🌗 Toggle Mode</button>
-  
-  <div id="output">Your mood-based quote will appear here.</div>
-  
-  <div class="question">?</div>
+  <div class="container">
+    <h1>InspireAI <span class="question">?</span></h1>
+    <p>Type a keyword (like <b>rain, happy, sad, love, romantic</b>) and let AI inspire you ✨</p>
+    <input type="text" id="keyword" placeholder="Enter a word...">
+    <br><br>
+    <button onclick="generateQuote()">Generate</button>
+    <button onclick="toggleMode()">Toggle Mode</button>
+    <p id="output"></p>
+  </div>
 
   <script>
     const quotes = {
+      rain: [
+        "Rain is not only drops of water, it’s the love of the sky for earth.",
+        "Let the rain wash away your worries."
+      ],
       happy: [
-        "Happiness is not out there, it’s in you.",
-        "A smile is happiness you’ll find right under your nose."
+        "Happiness is not by chance, but by choice.",
+        "Smile, and the world smiles with you."
       ],
       sad: [
-        "Tears are words the heart can’t express.",
-        "Sadness is but a wall between two gardens."
-      ],
-      demotivated: [
-        "It’s okay to rest, but never quit.",
-        "Remember why you started before you give up."
-      ],
-      depressed: [
-        "The darkest nights produce the brightest stars.",
-        "You are stronger than you think."
-      ],
-      romantic: [
-        "Love is composed of a single soul inhabiting two bodies.",
-        "In your smile, I see something more beautiful than the stars."
+        "Tears come from the heart, not from the brain.",
+        "Every storm runs out of rain, including the one in your heart."
       ],
       love: [
-        "Love recognizes no barriers.",
-        "To love is to recognize yourself in another."
+        "Love is composed of a single soul inhabiting two bodies.",
+        "To love and be loved is to feel the sun from both sides."
+      ],
+      romantic: [
+        "You are my today and all of my tomorrows.",
+        "In your smile, I see something more beautiful than the stars."
+      ],
+      depressed: [
+        "This too shall pass. Brighter days are coming.",
+        "Even the darkest night will end and the sun will rise."
+      ],
+      demotivated: [
+        "Small progress each day adds up to big results.",
+        "Don’t stop when you’re tired. Stop when you’re done."
       ]
     };
 
     function generateQuote() {
-      const mood = document.getElementById("mood").value.toLowerCase();
+      const keyword = document.getElementById("keyword").value.toLowerCase();
       const output = document.getElementById("output");
-      
-      if (quotes[mood]) {
-        const randomIndex = Math.floor(Math.random() * quotes[mood].length);
-        output.innerText = quotes[mood][randomIndex];
+      if (quotes[keyword]) {
+        const options = quotes[keyword];
+        const random = options[Math.floor(Math.random() * options.length)];
+        output.innerText = random;
       } else {
-        output.innerText = "Sorry, I don’t have a quote for that mood yet!";
+        output.innerText = "Sorry 😔 I don’t have inspiration for that word. Try rain, happy, sad, love, romantic, demotivated, or depressed.";
       }
     }
 
@@ -163,4 +147,3 @@
   </script>
 </body>
 </html>
-
