@@ -7,7 +7,7 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #ffcccc;
+      background: #ffcccc; /* light red background */
       margin: 0;
       padding: 0;
       display: flex;
@@ -18,7 +18,7 @@
     }
 
     .container {
-      background: #ffe6e6; 
+      background: #ffe6e6; /* light pink box */
       padding: 20px;
       border-radius: 10px;
       text-align: center;
@@ -30,7 +30,7 @@
 
     h1 {
       color: darkred;
-      margin-bottom: 15px;
+      margin-bottom: 10px;
     }
 
     input {
@@ -76,8 +76,10 @@
 
     /* Animated ? */
     .question {
-      font-size: 24px;
+      font-size: 28px;
       color: darkred;
+      display: inline-block;
+      margin-top: 5px;
       animation: bounce 1s infinite;
     }
     @keyframes bounce {
@@ -88,12 +90,13 @@
 </head>
 <body>
   <div class="container">
-    <h1>InspireAI <span class="question">?</span></h1>
+    <h1>InspireAI</h1>
+    <div class="question">?</div>
     <p>Type a keyword (like <b>rain, happy, sad, love, romantic</b>) and let AI inspire you ✨</p>
     <input type="text" id="keyword" placeholder="Enter a word...">
     <br><br>
     <button onclick="generateQuote()">Generate</button>
-    <button onclick="toggleMode()">Toggle Mode</button>
+    <button onclick="toggleMode()">🌗 Toggle Mode</button>
     <p id="output"></p>
   </div>
 
