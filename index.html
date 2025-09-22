@@ -2,23 +2,165 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>InspireAI - Poem & Quote Generator</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MoodVerse - Generative Quotes</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: red;
+      color: black;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      transition: background-color 0.5s, color 0.5s;
+    }
+
+    h1 {
+      color: black;
+      border: 3px solid black;
+      padding: 10px 20px;
+      border-radius: 10px;
+      background: white;
+    }
+
+    input {
+      padding: 10px;
+      width: 250px;
+      margin: 10px;
+      border: 2px solid black;
+      border-radius: 5px;
+    }
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 5px;
+      background-color: black;
+      color: red;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: red;
+      color: white;
+    }
+
+    #output {
+      margin-top: 20px;
+      padding: 15px;
+      border: 2px solid black;
+      border-radius: 10px;
+      width: 300px;
+      text-align: center;
+      font-style: italic;
+      background: white;
+      color: black;
+    }
+
+    /* Dark mode styles */
+    .dark-mode {
+      background-color: black;
+      color: red;
+    }
+
+    .dark-mode h1 {
+      border: 3px solid red;
+      background: black;
+      color: red;
+    }
+
+    .dark-mode input {
+      border: 2px solid red;
+      background: #222;
+      color: white;
+    }
+
+    .dark-mode #output {
+      border: 2px solid red;
+      background: #111;
+      color: red;
+    }
+
+    /* Floating question mark */
+    .question {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      font-size: 40px;
+      color: white;
+      animation: float 3s infinite ease-in-out;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0); }
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <h1>InspireAI</h1>
-    <p>Type a keyword (like <b>rain</b>, <b>happy</b>, <b>sad</b>, <b>love</b>, <b>romantic</b>) and let AI inspire you ✨</p>
+  <h1>🌟 MoodVerse - Generative Quotes 🌟</h1>
+  
+  <input type="text" id="mood" placeholder="Enter your mood... e.g. happy, sad">
+  <br>
+  <button onclick="generateQuote()">Generate</button>
+  <button onclick="toggleMode()">🌗 Toggle Mode</button>
+  
+  <div id="output">Your mood-based quote will appear here.</div>
+  
+  <div class="question">?</div>
 
-    <form id="poemForm">
-      <input type="text" id="keyword" placeholder="Enter a word..." required>
-      <button type="submit">Generate</button>
-    </form>
+  <script>
+    const quotes = {
+      happy: [
+        "Happiness is not out there, it’s in you.",
+        "A smile is happiness you’ll find right under your nose."
+      ],
+      sad: [
+        "Tears are words the heart can’t express.",
+        "Sadness is but a wall between two gardens."
+      ],
+      demotivated: [
+        "It’s okay to rest, but never quit.",
+        "Remember why you started before you give up."
+      ],
+      depressed: [
+        "The darkest nights produce the brightest stars.",
+        "You are stronger than you think."
+      ],
+      romantic: [
+        "Love is composed of a single soul inhabiting two bodies.",
+        "In your smile, I see something more beautiful than the stars."
+      ],
+      love: [
+        "Love recognizes no barriers.",
+        "To love is to recognize yourself in another."
+      ]
+    };
 
-    <div id="resultBox"></div>
-  </div>
+    function generateQuote() {
+      const mood = document.getElementById("mood").value.toLowerCase();
+      const output = document.getElementById("output");
+      
+      if (quotes[mood]) {
+        const randomIndex = Math.floor(Math.random() * quotes[mood].length);
+        output.innerText = quotes[mood][randomIndex];
+      } else {
+        output.innerText = "Sorry, I don’t have a quote for that mood yet!";
+      }
+    }
 
-  <script src="script.js"></script>
+    function toggleMode() {
+      document.body.classList.toggle("dark-mode");
+    }
+  </script>
 </body>
 </html>
 
