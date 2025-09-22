@@ -1,6 +1,6 @@
 body {
   font-family: "Segoe UI", Arial, sans-serif;
-  background: linear-gradient(to right, #8b0000, #cc0000); /* deep red gradient */
+  background: linear-gradient(to right, #8b0000, #cc0000); 
   text-align: center;
   padding: 50px;
   color: #111;
