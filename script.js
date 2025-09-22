@@ -1,4 +1,4 @@
-// Extended dataset of poems/quotes
+
 const poems = {
   rain: [
     "The rain whispers secrets only hearts can hear.",
